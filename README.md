@@ -139,8 +139,7 @@ net = neat.nn.FeedForwardNetwork.create(genome, config)
 | No improvement | Reward too sparse | Tune gate reward or add intermediate progress reward |
 | Exploding weights | Mutation too aggressive | Lower `weight_mutate_power` or `conn_add_prob` |
 
-## 🧾 License
-Add your preferred license (e.g., MIT) here.
+
 
 ## 🙌 Attribution
 - NEAT implementation: [`neat-python`](https://github.com/CodeReclaimers/neat-python)
