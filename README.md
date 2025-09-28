@@ -147,7 +147,7 @@ Add your preferred license (e.g., MIT) here.
 - Inspired by classic neuroevolution driving demos.
 
 ## 🎬 Demo Video
-Below is an embedded MP4 of a live training session (stored in the repo as `2.mp4`). GitHub will usually show it as a downloadable file; some browsers will play it inline. If it does not auto‑embed, use the direct link below or convert a short clip to a GIF.
+
 
 ![Video Demo](demo.gif)
 
