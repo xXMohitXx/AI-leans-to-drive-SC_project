@@ -2,7 +2,7 @@
 
 > Evolving tiny neural networks to drive a car around a spline‑generated track in real time.
 
-![Track Preview](track.png)
+
 
 ## ✨ Project Overview
 This project demonstrates an always-on / continuous evolution loop using the NEAT (NeuroEvolution of Augmenting Topologies) algorithm to teach simple feed-forward neural networks to drive a car around a procedural 2D track.
@@ -149,27 +149,7 @@ Add your preferred license (e.g., MIT) here.
 ## 🎬 Demo Video
 Below is an embedded MP4 of a live training session (stored in the repo as `2.mp4`). GitHub will usually show it as a downloadable file; some browsers will play it inline. If it does not auto‑embed, use the direct link below or convert a short clip to a GIF.
 
-<p align="center">
-  <video src="2.mp4" width="640" controls loop muted playsinline style="border:1px solid #444; border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,0.35);"></video>
-</p>
+![Video Demo](2.mp4)
 
-### Alternate Access
-- Direct file: [`2.mp4`](2.mp4)
-- (Optional) Optimized GIF (generate with `ffmpeg`):
-  ```powershell
-  ffmpeg -i 2.mp4 -vf "fps=20,scale=640:-1:flags=lanczos" -t 12 demo.gif
-  ```
-  Then embed:
-  ```markdown
-  ![Training Demo](demo.gif)
-  ```
 
-### Tip: Reduce File Size
-If the MP4 is large, you can compress it:
-```powershell
-ffmpeg -i 2.mp4 -vcodec libx264 -crf 28 -preset veryfast -an 2_compressed.mp4
-```
-Lower `-crf` = higher quality (default range ~18–30). Add audio track only if needed.
-
----
 **Enjoy evolving tiny drivers!** Feel free to open issues or ideas for improvements.
