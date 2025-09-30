@@ -30,12 +30,19 @@ def continuous_evolution(config_file):
         car.reset(offset=gid)   # spawn spread
         population.append({"genome": genome, "net": net, "car": car, "steps": 0})
 
+    # Generation semantics:
+    # Previously 'generation' incremented every frame (loop iteration), which made it appear to
+    # skyrocket. In a steady-state evolutionary loop, a more meaningful definition is a full
+    # turnover of the working population. We therefore count how many *replacements* (new children
+    # spawned) have occurred; once we reach POP_SIZE replacements we advance the generation counter.
     generation = 0
+    replacements_this_gen = 0
+    total_replacements = 0  # cumulative, can be useful for logging
+
     best_genomes = []
     fitness_history = []  # store (best, avg) tuples
 
     while True:
-        generation += 1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -65,6 +72,13 @@ def continuous_evolution(config_file):
                     new_car = CarEnv()
                     new_car.reset(offset=random.randint(0, POP_SIZE))  # spread again
                     alive_population.append({"genome": new_genome, "net": new_net, "car": new_car, "steps": 0})
+
+                    # Update steady-state generation counters
+                    replacements_this_gen += 1
+                    total_replacements += 1
+                    if replacements_this_gen >= POP_SIZE:
+                        generation += 1
+                        replacements_this_gen = 0
             else:
                 obs = car._get_obs()
                 action = net.activate(obs)
@@ -88,11 +102,13 @@ def continuous_evolution(config_file):
         if len(fitness_history) > GRAPH_HISTORY:
             fitness_history.pop(0)
 
+        turnover_progress = (replacements_this_gen / POP_SIZE) if POP_SIZE else 0
         lines = [
-            f"Generation: {generation}",
+            f"Generation: {generation} (+{replacements_this_gen}/{POP_SIZE})",
             f"Alive: {len(population)}",
             f"Best fitness: {best_fit:.1f}",
-            f"Avg fitness: {avg_fit:.1f}"
+            f"Avg fitness: {avg_fit:.1f}",
+            f"Total repl: {total_replacements}"
         ]
         for i, ln in enumerate(lines):
             surf = font.render(ln, True, (255,255,255))
